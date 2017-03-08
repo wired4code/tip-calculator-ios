@@ -27,15 +27,8 @@ class SettingsViewController: UIViewController {
     
     
     @IBAction func onChange(_ sender: AnyObject) {
-        
-        
         let selected = defaultTipControlSegment.selectedSegmentIndex
-        
         defaults.set(selected, forKey: "TipIndex")
-        
-        sharedDataAccess.number = selected
-        sharedDataAccess.initialized = true
-        
     }
 
 }
