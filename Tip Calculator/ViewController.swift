@@ -8,14 +8,6 @@
 
 import UIKit
 
-class DataAccess {
-    var number = 0
-    var initialized = false
-}
-
-let sharedDataAccess = DataAccess()
-
-
 class ViewController: UIViewController {
     
     let defaults = UserDefaults.standard
@@ -39,7 +31,6 @@ class ViewController: UIViewController {
         subTotalField.becomeFirstResponder()
         
         let TI = defaults.integer(forKey: "TipIndex")
-        
         tipValueControl.selectedSegmentIndex = TI
         
 
@@ -47,10 +38,10 @@ class ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        if (sharedDataAccess.initialized == true) {
-            tipValueControl.selectedSegmentIndex = sharedDataAccess.number
+        let TI = defaults.integer(forKey: "TipIndex")
+        if (TI != tipValueControl.selectedSegmentIndex) {
+            tipValueControl.selectedSegmentIndex = TI
         }
-        
     }
     
 
@@ -62,9 +53,7 @@ class ViewController: UIViewController {
 
     
     @IBAction func onTap(_ sender: AnyObject) {
-        
         view.endEditing(true)
-
     }
 
     @IBAction func getTip(_ sender: AnyObject) {
@@ -72,7 +61,6 @@ class ViewController: UIViewController {
         let percents = [0.15, 0.18, 0.2, 0.25]
         
         let people = [1, 2, 3, 4]
-        
         
         let tax = Double(taxField.text!) ?? 0
         
@@ -86,9 +74,7 @@ class ViewController: UIViewController {
         
         tipTotalLabel.text = String(format: "$%.02f", calculatedTip)
         
-        
         totalLabel.text = String(format: "$%.02f", finalTotal)
-        
         
     }
     
