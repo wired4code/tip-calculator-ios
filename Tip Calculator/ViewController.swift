@@ -24,7 +24,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var personsControl: UISegmentedControl!
     
+    @IBOutlet weak var tipText: UILabel!
     
+    @IBOutlet weak var totalText: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,8 +34,6 @@ class ViewController: UIViewController {
         
         let TI = defaults.integer(forKey: "TipIndex")
         tipValueControl.selectedSegmentIndex = TI
-        
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -42,6 +42,7 @@ class ViewController: UIViewController {
         if (TI != tipValueControl.selectedSegmentIndex) {
             tipValueControl.selectedSegmentIndex = TI
         }
+    
     }
     
 
@@ -50,6 +51,14 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func animateView() {
+        UIView.animate(withDuration: 1) {
+            self.tipTotalLabel.alpha = 1
+            self.totalLabel.alpha = 1
+            self.tipText.alpha = 1
+            self.totalText.alpha = 1
+        }
+    }
 
     
     @IBAction func onTap(_ sender: AnyObject) {
@@ -57,6 +66,8 @@ class ViewController: UIViewController {
     }
 
     @IBAction func getTip(_ sender: AnyObject) {
+        
+        animateView()
         
         let percents = [0.15, 0.18, 0.2, 0.25]
         
